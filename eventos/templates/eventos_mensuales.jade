@@ -1,0 +1,29 @@
+div#cabecera-eventos
+	a#last-year(href="#") &#59233;&#59233;
+	a#last-month(href="#") &#59233;
+	
+	h2 {{ fecha.fecha_inicio|date:"E Y"}}
+	
+	a#next-month(href="#") &#59234;
+	a#next-year(href="#") &#59234;&#59234;
+	div#fecha-mensual(data-month="{{ fecha.fecha_inicio|date:'n' }}", data-year="{{ fecha.fecha_inicio|date:'Y' }}", hidden)
+
+table
+	tr
+		items = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+		for item in items
+			th= item
+	{% for week in calendario %}
+	tr
+		{% for dia, eventos_dia, clase in week %}
+		td(class="{{ clase }}")
+			span {{ dia }}
+			{% for evento in eventos_dia %}
+			div
+				a(data-titulo="{{ evento.titulo }}", data-dia-desde='{{ evento.desde|date:"D" }}', data-hora-desde='{{ evento.desde|date:"H:i" }}', data-fecha-desde='{{ evento.desde|date:"j" }}', data-dia-hasta='{{ evento.hasta|date:"D" }}', data-hora-hasta='{{ evento.hasta|date:"H:i" }}', data-fecha-hasta='{{ evento.hasta|date:"j" }}') 
+						{{ evento.titulo }} 
+			{% endfor %}
+		{% endfor %}
+	{% endfor %}
+
+div#calendario-info

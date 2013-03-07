@@ -1,0 +1,147 @@
+@font-face
+	font-family 'Entypo'
+	font-style normal
+	src url('../fonts/Entypo/entypo.woff')
+
+table
+	table-layout fixed
+	width 99%
+
+td
+	border 1px solid rgb(221,221,221)
+	color #555
+	height 5.8em
+	overflow hidden
+	text-align right
+	vertical-align top
+	width 14.2%
+
+th
+	background #555
+	border 1px solid #eee
+	color #eee
+	height 3em
+	text-transform uppercase
+
+#cabecera-eventos
+	text-align center
+	width 99%
+
+	a
+		color #333
+		display inline-block
+		font-family 'Entypo'
+		font-size 4em
+		margin 0 1em
+		text-decoration none
+		vertical-align middle
+
+#calendario
+	overflow-x hidden
+	overflow-y auto
+	position relative
+
+	h2
+		color #333
+		display inline-block
+		margin 0 1em
+		vertical-align middle
+
+#last-year, #next-year
+	letter-spacing -0.1em
+
+.dia
+	white-space nowrap
+
+	& span
+		font-size 1.5em
+
+	&.hoy
+		background #92D8F7
+
+		div
+			border-bottom 1px solid rgb(135, 206, 235)
+			border-top 1px solid rgb(135, 206, 235)
+
+		a
+			color #0767A8
+			cursor pointer
+			display block
+			overflow hidden
+			text-decoration none
+			text-overflow ellipsis
+	&.evento
+		background #f0f0f0
+
+		div
+			background rgba(255,255,255,0.5)
+			border-bottom 1px solid #d3d3d3
+			border-top 1px solid #d3d3d3
+			margin-bottom 0.5em
+			padding 0 0.4em
+		
+		a
+			color rgb(250, 128, 114)
+			cursor pointer
+			display block
+			overflow hidden
+			text-decoration none
+			text-overflow ellipsis
+
+.info-left, .info-right
+	background #EDEDED
+	border 2px solid #666666
+	border-radius 0.5em
+	box-shadow 0 0 5px #888888
+	font-size 0.8em
+	display none
+	padding-top 1em
+	position absolute
+	text-shadow 0 1px 0 #fff
+	width 18em
+
+	h3
+		margin 0 0.5em
+		text-align	center
+
+	p
+		margin-left 1em
+
+.info-left
+	&:before
+		content ''
+		border-color transparent transparent transparent #666666
+		border-width 12px
+		border-style solid
+		position absolute
+		top 40%
+		right -2em
+
+	&:after
+		content ''
+		border-color transparent transparent transparent #EDEDED
+		border-width 11px
+		border-style solid
+		position absolute
+		top 41%
+		right -1.7em
+
+
+.info-right
+	&:before
+		content ''
+		border-color transparent #666666 transparent transparent
+		border-width 12px
+		border-style solid
+		position absolute
+		top 40%
+		left -2em
+
+	&:after
+		content ''
+		border-color transparent #EDEDED transparent transparent
+		border-width 11px
+		border-style solid
+		position absolute
+		top 41%
+		left -1.7em

@@ -32,6 +32,8 @@ function setInitial(){
 	{
 		horizontal: true
 	});
+
+	var eventos = Eventos();
 }
 
 function selectMenu(data){

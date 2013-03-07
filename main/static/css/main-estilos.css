@@ -20,6 +20,7 @@ header {
   position: fixed;
   top: 0.2em;
   width: 10em;
+  z-index: 10;
 }
 nav {
   margin: 5em auto 0 auto;
@@ -87,19 +88,15 @@ nav ul a {
   text-decoration: none;
 }
 #main {
-  display: -webkit-box;
-  display: -moz-box;
   margin: 0 0 0 11em;
-  width: 360%;
-  -webkit-box-orient: inline-axis;
-  -moz-box-orient: inline-axis;
-  box-orient: inline-axis;
+  width: 345%;
 }
 #main h2 {
   margin: 0;
 }
 #main section {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  background: rgba(0,0,0,0.3);
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  width: 24.9%;
 }

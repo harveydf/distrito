@@ -1,14 +1,28 @@
 !!! 5
 html(lang="es")
 	head
+		{% load static %}
+		{% load dajaxice_templatetags %}
+		{% load eventos_tags %}
+		
 		meta(charset="utf-8")
 		title Distrito Chicamocha
+		
 		link(rel="stylesheet", href="/static/css/normalize.css")
-		link(rel='stylesheet', href="/static/css/main-estilos.css")		
+		link(rel="stylesheet", href="/static/css/main-estilos.css")	
+
+		link(rel="stylesheet", href="/static/css/eventos.css")
+		
 		script(src="http://code.jquery.com/jquery-1.9.1.min.js")
+		script(src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js")
 		script(src="/static/js/waypoints.min.js")
 		script(src="/static/js/prefixfree.min.js")
+		
+		{% dajaxice_js_import %}
+		script(src="{% static '/static/dajax/jquery.dajax.core.js' %}")
+		
 		script(src="/static/js/main.js")
+		script(src="/static/js/eventos.js")
 	body
 		header
 			h1 Distrito Chicamocha
@@ -23,14 +37,14 @@ html(lang="es")
 					li
 						a(href="#noticias") Noticias
 					li 
-						a(href="#usuario") {{ username }}
+						a(href="#usuario") {{ request.user.username }}
 					li
 						a(href="/logout/") Salir
 		section#main
 			section#archivos
 				h2 aquí van los archivos
 			section#calendario
-				h2 Calendario
+				{% show_eventos_mensuales %}
 			section#mensajes
 				h2 Mensajes
 			section#noticias
