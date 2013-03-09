@@ -12,9 +12,11 @@ html(lang="es")
 		link(rel="stylesheet", href="/static/css/main-estilos.css")	
 
 		link(rel="stylesheet", href="/static/css/eventos.css")
+		link(rel="stylesheet", href="/static/css/datepicker.css")
 		
 		script(src="http://code.jquery.com/jquery-1.9.1.min.js")
 		script(src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js")
+		script(src="/static/js/jquery.ui.datepicker-es.js")
 		script(src="/static/js/waypoints.min.js")
 		script(src="/static/js/prefixfree.min.js")
 		
@@ -29,17 +31,29 @@ html(lang="es")
 			nav
 				ul
 					li.selected
-						a(href="#archivos") Archivos
+						a(href="#archivos") 
+							span.icon &#128240; 
+							| Archivos
 					li
-						a(href="#calendario") Calendario
+						a(href="#calendario") 
+							span.icon &#128197; 
+							| Calendario
 					li
-						a(href="#mensajes") Mensajes
+						a(href="#mensajes") 
+							span.icon &#59168; 
+							| Mensajes
 					li
-						a(href="#noticias") Noticias
+						a(href="#noticias") 
+							span.icon &#127908; 
+							| Noticias
 					li 
-						a(href="#usuario") {{ request.user.username }}
+						a(href="#usuario") 
+							span.icon &#128100; 
+							| {{ request.user.username }}
 					li
-						a(href="/logout/") Salir
+						a(href="/logout/") 
+							span.icon &#59201; 
+							| Salir
 		section#main
 			section#archivos
 				h2 aquí van los archivos

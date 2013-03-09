@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.forms import ModelForm
 
 class Eventos(models.Model):
 	REPETIR_CHOICES = (
@@ -18,3 +19,7 @@ class Eventos(models.Model):
 
 	def __unicode__(self):
 		return self.titulo
+
+class EventosForm(ModelForm):
+	class Meta:
+		model = Eventos

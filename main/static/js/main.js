@@ -1,3 +1,5 @@
+var eventos='';
+
 $(document).on('ready', main);
 
 function main(){
@@ -33,7 +35,7 @@ function setInitial(){
 		horizontal: true
 	});
 
-	var eventos = Eventos();
+	eventos = new Eventos();
 }
 
 function selectMenu(data){

@@ -1,28 +1,3 @@
-@font-face {
-  font-family: 'Entypo';
-  font-style: normal;
-  src: url("../fonts/Entypo/entypo.woff");
-}
-table {
-  table-layout: fixed;
-  width: 99%;
-}
-td {
-  border: 1px solid #ddd;
-  color: #555;
-  height: 5.8em;
-  overflow: hidden;
-  text-align: right;
-  vertical-align: top;
-  width: 14.2%;
-}
-th {
-  background: #555;
-  border: 1px solid #eee;
-  color: #eee;
-  height: 3em;
-  text-transform: uppercase;
-}
 #cabecera-eventos {
   text-align: center;
   width: 99%;
@@ -47,22 +22,52 @@ th {
   margin: 0 1em;
   vertical-align: middle;
 }
+#calendario table {
+  table-layout: fixed;
+  width: 99%;
+}
+#calendario td {
+  border: 1px solid #ddd;
+  color: #555;
+  height: 5.8em;
+  overflow: hidden;
+  text-align: right;
+  user-select: none;
+  vertical-align: top;
+  width: 14.2%;
+}
+#calendario th {
+  background: #555;
+  border: 1px solid #eee;
+  color: #eee;
+  height: 3em;
+  text-transform: uppercase;
+}
 #last-year,
 #next-year {
   letter-spacing: -0.1em;
 }
 .dia {
+  height: 100%;
   white-space: nowrap;
 }
 .dia span {
-  font-size: 1.5em;
+  font-size: 1.2em;
+}
+.dia ul {
+  margin: 0;
+  min-height: 3em;
+  padding: 0;
+  list-style: none;
 }
 .dia.hoy {
   background: #92d8f7;
 }
 .dia.hoy div {
-  border-bottom: 1px solid #87ceeb;
-  border-top: 1px solid #87ceeb;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #87ceeb;
+  margin-bottom: 0.5em;
+  padding: 0 0.4em;
 }
 .dia.hoy a {
   color: #0767a8;
@@ -72,13 +77,15 @@ th {
   text-decoration: none;
   text-overflow: ellipsis;
 }
+.dia.hoy .ui-state-highlight {
+  background: rgba(255,255,255,0.5);
+}
 .dia.evento {
   background: #f0f0f0;
 }
 .dia.evento div {
   background: rgba(255,255,255,0.5);
-  border-bottom: 1px solid #d3d3d3;
-  border-top: 1px solid #d3d3d3;
+  border: 1px solid #d3d3d3;
   margin-bottom: 0.5em;
   padding: 0 0.4em;
 }
@@ -89,6 +96,14 @@ th {
   overflow: hidden;
   text-decoration: none;
   text-overflow: ellipsis;
+}
+.dia.evento .ui-state-highlight {
+  background: rgba(255,255,255,0.5);
+}
+.dia .ui-state-highlight {
+  background: #f7f7f7;
+  height: 1.5em;
+  line-height: 1.2em;
 }
 .info-left,
 .info-right {

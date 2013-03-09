@@ -1,5 +1,9 @@
-@import url("http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700");
+// @import url("http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700");
 @import url("http://fonts.googleapis.com/css?family=Quicksand:300,400,700");
+@font-face
+	font-family 'Entypo'
+	font-style normal
+	src url('../fonts/Entypo/entypo.woff')
 
 body
 	font-family 'Quicksand'
@@ -32,7 +36,7 @@ nav
 		list-style none
 		margin 0
 		padding 0
-		text-align center
+		text-align left
 
 		li
 			border-bottom 1px solid rgb(83, 51, 22)
@@ -76,17 +80,19 @@ nav
 					border-style solid
 					border-width 6px
 					content ' '
-					height 0
 					position absolute
 					right 0px
-					top 2.5em
-					width 0
+					top 2.8em
 					z-index -1
 
 		a
 			color rgba(192, 145, 101, 0.1)
 			font-size 1.3em
 			text-decoration none
+
+		.icon
+			font-family 'Entypo'
+			font-size 1.5em
 
 #main
 	margin 0 0 0 11em

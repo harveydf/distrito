@@ -1,4 +1,5 @@
 from django import template
+from eventos.models import EventosForm
 from eventos.views import get_eventos, get_fechas, crear_calendario_mensual
 
 register = template.Library()
@@ -11,5 +12,7 @@ def show_eventos_mensuales(context, fecha=None):
 	fechas = get_fechas(fecha, tz)
 	eventos = get_eventos(request, fechas)
 	calendario = crear_calendario_mensual(request, eventos, fechas)
+
+	form = EventosForm()
 	
-	return {'calendario': calendario, 'fecha': fechas}
+	return {'calendario': calendario, 'fecha': fechas, 'form': form}

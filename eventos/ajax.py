@@ -36,5 +36,12 @@ def cargar_calendario_mensual(request, datos):
 
 	data = show_eventos_mensuales(context=RequestContext(request), fecha=fecha)
 
+	jquery = "$('.sortable').sortable({\
+		connectWith: '.sortable', \
+		placeholder: 'ui-state-highlight',\
+		receive: eventos.sortable_receive\
+	}).disableSelection();"
+
 	dajax.assign('#calendario', 'innerHTML', render_to_string('eventos_mensuales.jade', data))
+	dajax.script(jquery)
 	return dajax.json()
