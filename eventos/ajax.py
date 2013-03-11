@@ -17,8 +17,6 @@ def cargar_calendario_mensual(request, datos):
 
 	date_calendar = datetime.date(year, month, 1)
 
-	print option, tipo
-
 	if option == 'next':
 		if tipo == 'month':
 			print date_calendar
@@ -36,12 +34,21 @@ def cargar_calendario_mensual(request, datos):
 
 	data = show_eventos_mensuales(context=RequestContext(request), fecha=fecha)
 
-	jquery = "$('.sortable').sortable({\
-		connectWith: '.sortable', \
-		placeholder: 'ui-state-highlight',\
-		receive: eventos.sortable_receive\
-	}).disableSelection();"
+	jquery = "$('.sortable').sortable({ \
+					connectWith: '.sortable', \
+					placeholder: 'ui-state-highlight', \
+					receive: eventos.sortable_receive \
+			  }).disableSelection();"
 
 	dajax.assign('#calendario', 'innerHTML', render_to_string('eventos_mensuales.jade', data))
 	dajax.script(jquery)
+	return dajax.json()
+
+@dajaxice_register
+def update_evento_dia(request, datos):
+	print datos
+
+	# llamada a la vista para actualizar el evento
+
+	dajax = Dajax()
 	return dajax.json()

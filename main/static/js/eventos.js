@@ -125,6 +125,20 @@ var Eventos = function(){
 			$(this).data('dia-desde', $.datepicker.regional[ "es" ].dayNamesShort[date_desde.getDay()])
 			$(this).data('dia-hasta', $.datepicker.regional[ "es" ].dayNamesShort[date_hasta.getDay()])
 		});
+
+		var data_ajax = {
+			datos: {
+				'titulo': evento.first().data('titulo'),
+				'dia_desde': evento.first().data('fecha-desde'),
+				'dia_hasta': evento.first().data('fecha-hasta'),
+				'hora_desde': evento.first().data('hora-desde'),
+				'hora_hasta': evento.first().data('hora-hasta'),
+				'month': data_mes.month,
+				'year': data_mes.year
+			}
+		};
+
+		Dajaxice.eventos.update_evento_dia(Dajax.process, data_ajax);
 	}
 
 	this.cambiar_clase = function() {
