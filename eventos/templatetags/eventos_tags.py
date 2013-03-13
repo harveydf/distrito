@@ -15,4 +15,4 @@ def show_eventos_mensuales(context, fecha=None):
 
 	form = EventosForm()
 	
-	return {'calendario': calendario, 'fecha': fechas, 'form': form}
+	return {'group': request.user.groups.get(), 'calendario': calendario, 'fecha': fechas, 'form': form}

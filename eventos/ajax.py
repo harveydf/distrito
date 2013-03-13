@@ -5,6 +5,7 @@ from dajaxice.decorators import dajaxice_register
 from dateutil.relativedelta import relativedelta
 from django.template import RequestContext
 from django.template.loader import render_to_string
+from eventos.views import update_dia, agregar_nuevo_evento
 from eventos.templatetags.eventos_tags import show_eventos_mensuales
 
 @dajaxice_register
@@ -30,7 +31,7 @@ def cargar_calendario_mensual(request, datos):
 		elif tipo == 'year':
 			date_calendar += relativedelta(years=-1)
 
-	fecha = {'year': date_calendar.year, 'month': date_calendar.month, 'day': None}
+	fecha = {'year': date_calendar.year, 'month': date_calendar.month}
 
 	data = show_eventos_mensuales(context=RequestContext(request), fecha=fecha)
 
@@ -46,9 +47,15 @@ def cargar_calendario_mensual(request, datos):
 
 @dajaxice_register
 def update_evento_dia(request, datos):
-	print datos
+	
+	update_dia(request, datos)
 
-	# llamada a la vista para actualizar el evento
+	return True
 
-	dajax = Dajax()
-	return dajax.json()
+@dajaxice_register
+def nuevo_evento(request, datos):
+	
+	agregar_nuevo_evento(request, datos)
+
+	return True
+

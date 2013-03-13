@@ -2,11 +2,11 @@ div#cabecera-eventos
 	a#last-year(href="#") &#59233;&#59233;
 	a#last-month(href="#") &#59233;
 	
-	h2 {{ fecha.fecha_inicio|date:"E Y"}}
+	h2 {{ fecha.inicio|date:"E Y"}}
 	
 	a#next-month(href="#") &#59234;
 	a#next-year(href="#") &#59234;&#59234;
-	div#fecha-mensual(data-month="{{ fecha.fecha_inicio|date:'n' }}", data-year="{{ fecha.fecha_inicio|date:'Y' }}", hidden)
+	div#fecha-mensual(data-month="{{ fecha.inicio|date:'n' }}", data-year="{{ fecha.inicio|date:'Y' }}", hidden)
 
 table
 	tr
@@ -34,6 +34,32 @@ table
 div#calendario-info
 
 div#agregar-evento
-	p {{ form.titulo }}
-	p {{ form.desde }}
-	p {{ form.hasta }}
+	form
+		{% csrf_token %}
+		p 
+			input(type="text", name="titulo", maxlength="255")
+		p 
+			| Desde: 
+			input.fecha(type="text", name="fecha_desde")
+			| a las 
+			input.hora(type="text", name="hora_desde")
+		p 
+			| Hasta : 
+			input.fecha(type="text", name="fecha_hasta")
+			| a las
+			input.hora(type="text", name="hora_hasta")
+		p
+			| Personal:
+			input(type="checkbox", name="personal")
+
+		{% if group.name ==  "Distrital" %}
+		p 
+			| Ministerios:
+			{{ form.grupo }}
+		{% endif %}
+
+		p
+			button#cancelar-agregar-evento(type="button") Cancelar
+			button#aceptar-agregar-evento(type="button") Aceptar
+
+

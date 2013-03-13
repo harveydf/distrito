@@ -1,6 +1,7 @@
 var Eventos = function(){
 
 	that = this;
+	this.cambiar_clase;
 
 	// Main Calendario
 	this.cargar_calendario = function(data){
@@ -14,8 +15,8 @@ var Eventos = function(){
 	}
 
 	// Modal info evento functions
-	this.cerrar_info_evento = function(){
-		var info = $('#calendario-info');
+	this.cerrar_info_evento = function(data){
+		var info = $(data.data.popup);
 
 		if(info.is(':visible')){
 
@@ -23,6 +24,38 @@ var Eventos = function(){
 
 			$(document).off('click', '#calendario', that.cerrar_info_evento);
 		}
+	}
+
+	this.evento_popup = function(element, popup){
+		var parent = $(element).parent();
+
+		var info = $(popup);
+
+		var position = $(parent).position();
+		var width = $(parent).width();
+		var height = $(parent).height();
+
+		if ($(parent).parents('td')[0].cellIndex != 6){
+			info.attr('class', 'info-right');
+
+			var css = {
+				top: position.top - info.height()/2 + $('#calendario').scrollTop(),
+				left: position.left + width/2
+			};
+		}
+
+		else{
+			info.attr('class', 'info-left');
+			
+			var css = {
+				top: position.top - info.height()/2 + $('#calendario').scrollTop(),
+				left: position.left  - info.width() + width/2
+			};
+		}
+
+		info.css(css);
+
+		info.show('drop', { direction: 'right' }, 200);
 	}
 
 	this.cargar_info_evento = function(data){
@@ -49,7 +82,7 @@ var Eventos = function(){
 		var width = $(parent).width();
 		var height = $(parent).height();
 
-		if (parent.parentNode.cellIndex != 6){
+		if ($(parent).parents('td')[0].cellIndex != 6){
 			info.attr('class', 'info-right');
 
 			var css = {
@@ -73,9 +106,35 @@ var Eventos = function(){
 
 		data.stopPropagation();
 
-		$(document).on('click', '#calendario', that.cerrar_info_evento);
+		$(document).on('click', '#calendario', {'popup': '#calendario-info'}, that.cerrar_info_evento);
 	}
 
+	this.form_crear_evento = function(data){
+		var div_dia = $(data.currentTarget);
+		var fecha = div_dia.data('dia');
+		var dia_desde = $.datepicker.regional[ "es" ].dayNamesShort[div_dia.parents('td')[0].cellIndex];
+
+		var li = $('<li>');
+		var div = $('<div>');
+		var a = $('<a data-titulo="Nuevo Evento" data-dia-desde="'+ dia_desde +'" data-hora-desde="12:00" data-fecha-desde="'+
+				   fecha +'" data-dia-hasta="'+ dia_desde +'" data-hora-hasta="13:00" data-fecha-hasta="'+ fecha +'">')
+				.html('Nuevo Evento');
+
+		div.append(a);
+		li.append(div);
+		div_dia.find('ul').append(li);
+		
+		that.cambiar_clase();
+		that.evento_popup(a[0], '#agregar-evento');
+		
+		$('#cancelar-agregar-evento').on('click', function(){
+			$('#agregar-evento').hide('drop', { direction: 'right' }, 200);
+			li.remove();
+			that.cambiar_clase();
+		})
+	}
+
+	// Datepicker functions
 	$.datepicker.setDefaults({
 		inline: true,
 		nextText: '&#59238;',
@@ -88,17 +147,16 @@ var Eventos = function(){
 		constrainInput: true,
 	});
 
-	// Datepicker functions
 	this.set_datepicker = function(){
-		$('#id_desde').datepicker({
+		$('[name="fecha_desde"]').datepicker({
 			onClose: function( selectedDate ) {
-		        		$( "#id_hasta" ).datepicker( "option", "minDate", selectedDate );
+		        		$('[name="fecha_hasta"]').datepicker( "option", "minDate", selectedDate );
 					},
 		});
 
-		$('#id_hasta').datepicker({
+		$('[name="fecha_hasta"]').datepicker({
 			onClose: function( selectedDate ) {
-		        		$( "#id_desde" ).datepicker( "option", "maxDate", selectedDate );
+		        		$('[name="fecha_desde"]').datepicker( "option", "maxDate", selectedDate );
 					},
 		});
 	}
@@ -106,6 +164,10 @@ var Eventos = function(){
 	this.set_datepicker();
 
 	// Sortable functions
+	this.enviar_actualizar_eventos = function(){
+		// Enviar mensajes de actualizar calendario
+	}
+
 	this.actualizar_dataset = function(element) {
 		var fechas = [];
 		var evento = $('a[data-titulo="'+ element.data('titulo') +'"]');
@@ -114,7 +176,6 @@ var Eventos = function(){
 		evento.each(function() {
 			fechas.push($(this).parents('.dia').data('dia'));
 		});
-
 
 		var date_desde = new Date(data_mes.year, data_mes.month-1, $(fechas).first()[0]);
 		var date_hasta = new Date(data_mes.year, data_mes.month-1, $(fechas).last()[0]);
@@ -138,7 +199,7 @@ var Eventos = function(){
 			}
 		};
 
-		Dajaxice.eventos.update_evento_dia(Dajax.process, data_ajax);
+		Dajaxice.eventos.update_evento_dia(that.enviar_actualizar_eventos, data_ajax);
 	}
 
 	this.cambiar_clase = function() {
@@ -182,7 +243,7 @@ var Eventos = function(){
 
 	$(document).on('click', '#calendario table a', this.cargar_info_evento);
 
-	// $(document).on('dblclick', '.dia', this.cargar_crear_evento);
+	$(document).on('dblclick', '.dia', this.form_crear_evento);
 
 
 }
